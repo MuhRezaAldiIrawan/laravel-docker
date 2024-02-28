@@ -1,0 +1,25 @@
+
+pipelines:
+  branches:
+    master:
+    - parallel:
+        - step:
+            name: StagementDocker.V.2 - stage
+            deployment: Staging
+            script:
+            - pipe: atlassian/ssh-run:0.3.0
+              variables:
+                SSH_USER: 'root'
+                SERVER: $STAGE_SERVER
+                SSH_KEY: $MY_SSH_KEY
+                MODE: 'script'
+                PORT: $STAGE_PORT
+                COMMAND: 'deploy-ext/deploy.sh'
+                ENV_VARS: >-
+                  APPNAME=$APPNAME
+                  APPPATH=$APPPATH
+                  ENV_DEPLOY=$ENV_DEPLOY
+                  MODE_ENV=$MODE_ENV
+                  BRANCH=${BITBUCKET_BRANCH}
+                  COMMIT=${BITBUCKET_COMMIT}
+
