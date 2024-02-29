@@ -44,9 +44,7 @@ services:
             - "3306:3306"
         environment:
             MYSQL_DATABASE: laravel
-            MYSQL_ROOT_PASSWORD: your_mysql_root_password
-            SERVICE_TAGS: dev
-            SERVICE_NAME: mysql
+            MYSQL_ROOT_PASSWORD: admin
         volumes:
             - dbdata:/var/lib/mysql/
             - ./deploy-ext/mysql/my.cnf:/etc/mysql/my.cnf
